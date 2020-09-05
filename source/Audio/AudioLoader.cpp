@@ -7,6 +7,7 @@
 #include "Base/Mem.h"
 #include "Game/GameDataFS.h"
 #include <vector>
+#include <limits>
 
 //------------------------------------------------------------------------------------------------------------------------------------------
 // Some ids expected in AIFF-C and AIFF files

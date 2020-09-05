@@ -177,6 +177,7 @@ set(SOURCE_FILES
     "UI/UIUtils.h"
     "UI/WipeFx.cpp"
     "UI/WipeFx.h"
+    "Main.cpp"
 )
 
 set(OTHER_FILES
@@ -184,11 +185,14 @@ set(OTHER_FILES
 
 # Platform specific sources
 if (PLATFORM_WINDOWS)
-    list(APPEND SOURCE_FILES "Main_Windows.cpp")
+    #list(APPEND SOURCE_FILES "Main_Windows.cpp")
 elseif(PLATFORM_MAC)
-    list(APPEND SOURCE_FILES "Main_Mac.mm")
+    #list(APPEND SOURCE_FILES "Main_Mac.mm")
+    add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-x>)
+    add_compile_options($<$<COMPILE_LANGUAGE:CXX>:objective-c++>)
+
 else()
-    list(APPEND SOURCE_FILES "Main_StandardCpp.cpp")
+    #list(APPEND SOURCE_FILES "Main_StandardCpp.cpp")
 endif()
 
 # Platform and compiler specific defines
