@@ -183,16 +183,17 @@ set(SOURCE_FILES
 set(OTHER_FILES
 )
 
-# Platform specific sources
-if (PLATFORM_WINDOWS)
-    #list(APPEND SOURCE_FILES "Main_Windows.cpp")
-elseif(PLATFORM_MAC)
+# Platform specific command line arguments
+if (PLATFORM_MAC)
     #list(APPEND SOURCE_FILES "Main_Mac.mm")
-    add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-x>)
-    add_compile_options($<$<COMPILE_LANGUAGE:CXX>:objective-c++>)
-
-else()
-    #list(APPEND SOURCE_FILES "Main_StandardCpp.cpp")
+    if (COMPILER_GCC) 
+        add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-x>)
+    elseif(COMPILER_CLANG)
+        add_compile_options($<$<COMPILE_LANGUAGE:CXX>:--language>)
+    endif()
+    if (COMPILER_GCC OR COMPILER_CLANG)
+        add_compile_options($<$<COMPILE_LANGUAGE:CXX>:objective-c++>)
+    endif()
 endif()
 
 # Platform and compiler specific defines
